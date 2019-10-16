@@ -13,6 +13,11 @@ If you have guests on the floor, you can activate an alternative setting. The al
 
 For this project the prototype is built in Arduino. In this document you will find a guide how to access it. The service works between cardreader, motion sensor, servo and an app.
 
+### Essentials
+* arduino
+* servo
+* ultrasonic sensor hc-sr04
+* wires
 
 # Guide
 ## Step 1 Setting up the servo
@@ -117,7 +122,11 @@ What I have so far is:
 
 The only thing that I am missing right now is:
 * letting the unique serial number from your phone be the trigger to open the door if the distance is under 200 meters. 
-* This could be solved with the external app where people sign themselves up for. If the database is connected, Arduino will pick up the external database and replaces the distance with the unique serial number.
+
+This could be solved with the external app where people sign themselves up for. If the database is connected, Arduino will pick up the external database and replaces the distance with the unique serial number. In the future I will implement this and make this prototype, working in real life.
+
+## Summary 
+There are various options for solving this problem. The solution for this has been chosen: simplifying life through an item that you always carry with you. With using arduino, a servo, ultrasonic sensor hc-sr04 and wires is the final product close.
 
 ## License
 
