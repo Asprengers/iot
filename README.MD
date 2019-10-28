@@ -41,11 +41,6 @@ https://planet.mysql.com/?tag_search=14086
 
 For this project we need a servo motor. A servo motor has three wires: power, ground, and signal. The power wire should be connected to the 3V pin. The ground wire connected to a ground pin on the board. The signal pin should be connected to pin d5 on the board.
 
-I will be using it like this example:
-
-![sweep_BB](https://user-images.githubusercontent.com/34510981/66858492-ad62c480-ef89-11e9-99ed-e7b8db3975fb.png)
-
-
 The code will be used from the template sweep that Arduino provided, with a slight few changes:
 
 
@@ -80,8 +75,6 @@ By adding the 90 degrees, it will have the movement that a door makes.
 ## Step 2 Adding distance sensor 
 
 To have a sensor that locates the distance I will be using an ultrasonic sensor hc-sr04. This sensor registers all the objects in the distance and will result in an action. The action must be opening the door. 
-![dis4](https://user-images.githubusercontent.com/34510981/66858532-c7040c00-ef89-11e9-91cd-4a8cc522d105.png)
-
 
 By adding the code to the document it will look like this:
 
