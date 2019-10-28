@@ -1,28 +1,45 @@
-# Manual
-This project revolves about simplifying your life .
+# external server connection for nodemcu v3 esp8266
+How to connect an external server connection to your nodemcu v3 esp8266 
+In here it will be explained how to set up a nodemcu v3 esp8266 and send data from the server to an external device.  
 
-## Background story
-It rains quite often in the Netherland. During one of those rain showers, you are arriving home. Once you get home you must open the gate door. You take the key, which is very difficult, because everything is wet. In addition, the lock cannot withstand water. The next step  is scanning your card at the cardreader. The pass is not recognised properly because it is not waterproof. This all takes a lot of time and in the meantime you are completely soaked.
-
-## Solution
-There are various options for solving this problem. The solution for this has been chosen: simplifying life through an item that you always carry with you.
-
-In this case it is a telephone, this can also be a smartwatch. There is a landmark in your phone, such as a unique serialnumber, that activates the cardreader's system. You can manage this in advance and set who can access it. The cardreader recognises that it is you at an appropriate distance and therefore it unlocks the door for you, opens it and thus prevents the problem of being in the rain for a long time.
-
-If you have guests on the floor, you can activate an alternative setting. The alarm goes off by means of a motion sensor and you can control it via an app on your phone. You receive a call and you can see who it is. The door is opened at a distance. This can also happen if you are not at home yourself.
-
-For this project the prototype is built in Arduino. In this document you will find a guide how to access it. The service works between cardreader, motion sensor, servo and an app.
-
-### Essentials
+## requirements
+* nodemcu v3 esp8266
 * arduino
-* servo
 * ultrasonic sensor hc-sr04
+* mini servo sg90
 * wires
 
-# Guide
-## Step 1 Setting up the servo
+## Background story
+It rains quite often in the Netherland. During one of those rain showers, you are arriving home. Once you get home you must open the gate door. You take the key, which is very difficult, because everything is wet. In addition, the lock cannot withstand water. The next step is scanning your card at the cardreader. The pass is not recognised properly because it is not waterproof. This all takes a lot of time and in the meantime you are completely soaked.
 
-For this project we need a servo motor. A servo motor has three wires: power, ground, and signal. The power wire should be connected to the 5V pin. The ground wire connected to a ground pin on the board. The signal pin should be connected to pin 9 on the board.
+There are various options for solving this problem. The solution for this has been chosen: simplifying life through an item that you always carry with you.
+
+In this case it is a telephone, this can also be a smartwatch. There is a landmark in your phone, such as a nfc, that activates the cardreader's system. You can manage this in advance and set who can access it. The cardreader recognises that it is you at an appropriate distance and therefore it unlocks the door for you, opens it and this prevents the problem.
+
+# Guide
+## Step 1 Setting up the server
+To start with the project we need to create a server. This can be done in the program Arduino. To create a server I will be using a template. A few adjustments have to be done with this.
+* Change the wifi
+* Enter your credentials 
+* Create a specific route
+* Test the code
+
+More information 
+https://www.youtube.com/watch?v=oWw2bUaQmLU
+
+
+## Step 2 Setting up the database
+The database I will be using is a mysql. I will be using this library to connect it:
+https://github.com/ChuckBell/MySQL_Connector_Arduino. 
+In this one I will replace the connection from setting up the server to the one I created in step 1. 
+
+More information
+https://planet.mysql.com/?tag_search=14086
+
+
+## Step 3 Setting up the servo
+
+For this project we need a servo motor. A servo motor has three wires: power, ground, and signal. The power wire should be connected to the 3V pin. The ground wire connected to a ground pin on the board. The signal pin should be connected to pin d5 on the board.
 
 I will be using it like this example:
 
@@ -41,7 +58,7 @@ Servo myservo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
 
 void setup() {
-  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+  myservo.attach(D5);  // attaches the servo on pin d5 to the servo object
 }
 
 void loop() {
@@ -77,7 +94,7 @@ Servo myservo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
 
 void setup() {  
-  myservo.attach(9, OUTPUT);  // attaches the servo on pin 9 to the servo object
+  myservo.attach(D4, OUTPUT);  // attaches the servo on pin 9 to the servo object
   pinMode(echoPin, INPUT);
 }
 
@@ -114,19 +131,25 @@ long duration, distance;
 What’s new? 
 If you have reached your distance under 200 meter it will trigger the servo
 
-## Step 4 Future goals
+## Step 4 nfc
 
 What I have so far is:
+a server
+Database with connection to a server
 * motion from a servo
 * a distance notice that triggers a servo if I am close
 
 The only thing that I am missing right now is:
-* letting the unique serial number from your phone be the trigger to open the door if the distance is under 200 meters. 
+letting the nfc from your phone be the trigger to open the door if the distance is under 200 meters. 
 
-This could be solved with the external app where people sign themselves up for. If the database is connected, Arduino will pick up the external database and replaces the distance with the unique serial number. In the future I will implement this and make this prototype, working in real life.
+If the database is connected, Arduino will pick up the external database and replaces the distance with the unique nfc. In the future I will implement this and make this prototype, working in real life.
+
+A tutorial that I couldn't get to work has been found here, hopefully I can work on this in the future to find out why it hasn’t worked.
+https://www.instructables.com/id/NFC-Card-Reader-Data-to-PhpMyAdmin/
+
 
 ## Summary 
-There are various options for solving this problem. The solution for this has been chosen: simplifying life through an item that you always carry with you. With using arduino, a servo, ultrasonic sensor hc-sr04 and wires is the final product close.
+There are various options for solving this problem. The solution for this has been chosen: simplifying life through an item that you always carry with you. For this example it is a nfc from your phone, that will open the door for you. 
 
 ## License
 
